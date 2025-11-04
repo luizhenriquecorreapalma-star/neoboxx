@@ -108,7 +108,26 @@
                       <Icon name="cube" className="h-28 w-28 text-purple-700" />
                     </div>
                     <div className="mt-4 text-sm text-neutral-600">
-                      * Substitua por fotos/renderizações do seu produto.
+                      <!-- Início do carrossel NeoBoxx -->
+<div class="carousel" style="position: relative; overflow: hidden; border-radius: 12px; width: 100%; height: 300px;">
+  <div class="slides" style="display: flex; width: 400%; animation: slide 8s infinite;">
+    <img src="ativos/foto1.jpg" style="width: 100%; object-fit: cover;">
+    <img src="ativos/foto2.jpg" style="width: 100%; object-fit: cover;">
+    <img src="ativos/foto3.jpg" style="width: 100%; object-fit: cover;">
+    <img src="ativos/foto4.jpg" style="width: 100%; object-fit: cover;">
+  </div>
+  <style>
+    @keyframes slide {
+      0% { transform: translateX(0%); }
+      25% { transform: translateX(-100%); }
+      50% { transform: translateX(-200%); }
+      75% { transform: translateX(-300%); }
+      100% { transform: translateX(0%); }
+    }
+  </style>
+</div>
+<!-- Fim do carrossel NeoBoxx -->
+
                     </div>
                   </div>
                 </div>
