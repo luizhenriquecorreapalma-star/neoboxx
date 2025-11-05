@@ -109,14 +109,25 @@
                     </div>
                     <div className="mt-4 text-sm text-neutral-600">
                       <!-- Início do carrossel NeoBoxx -->
-<div class="carousel" style="position: relative; overflow: hidden; border-radius: 12px; width: 100%; height: 300px;">
+<div class="carrossel" style="position: relative; overflow: hidden; border-radius: 12px; width: 100%;">
   <div class="slides" style="display: flex; width: 400%; animation: slide 8s infinite;">
-    <img src="ativos/foto1.png" style="width:100%; object-fit:cover;">
-    <img src="ativos/foto2.png" style="width:100%; object-fit:cover;">
-    <img src="ativos/foto3.png" style="width:100%; object-fit:cover;">
-    <img src="ativos/foto4.png" style="width:100%; object-fit:cover;">
-  </div>
+    <img src="ativos/Foto1.png" style="width:100%; object-fit:cover;">
+    <img src="ativos/Foto2.png" style="width:100%; object-fit:cover;">
+    <img src="ativos/Foto3.png" style="width:100%; object-fit:cover;">
+    <img src="ativos/Foto4.png" style="width:100%; object-fit:cover;">
   <style>
+  </div>
+    @keyframes slide {
+      0% { transform: translateX(0%); }
+      25% { transform: translateX(-100%); }
+      50% { transform: translateX(-200%); }
+      75% { transform: translateX(-300%); }
+      100% { transform: translateX(0%); }
+    }
+  </style>
+</div>
+<!-- Fim do carrossel NeoBoxx -->
+
     @keyframes slide {
       0% { transform: translateX(0%); }
       25% { transform: translateX(-100%); }
