@@ -4,64 +4,176 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>NeoBoxx — Sua casa modular onde você quiser</title>
-    <meta name="description" content="NeoBoxx — Casas modulares de alto padrão, rápidas e sob medida. Modelos 18m² e 21m². Orçamentos via WhatsApp." />
+    <meta
+      name="description"
+      content="NeoBoxx — Casas modulares de alto padrão, rápidas e sob medida. Modelos 18m² e 21m². Orçamentos via WhatsApp."
+    />
     <link rel="icon" href="/assets/logo.png" />
     <!-- Tailwind via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- React & ReactDOM via CDN -->
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script
+      src="https://unpkg.com/react@18/umd/react.production.min.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+      crossorigin
+    ></script>
     <!-- Babel for in-browser JSX transform (simple static deploy) -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <!-- Lucide icons via CDN -->
     <script src="https://unpkg.com/lucide@0.454.0/dist/umd/lucide.js"></script>
     <style>
       /* Smooth scroll & font */
-      html { scroll-behavior: smooth; }
+      html {
+        scroll-behavior: smooth;
+      }
     </style>
   </head>
   <body class="bg-neutral-50 text-neutral-900 antialiased">
     <div id="root"></div>
 
     <script type="text/babel">
-      const {useState, useEffect} = React;
+      const { useState, useEffect } = React;
 
-      function Icon({name, className}) {
+      function Icon({ name, className }) {
         // Simple Lucide icon wrapper
-        useEffect(()=>{ window.lucide && window.lucide.createIcons(); }, []);
-        return <i data-lucide={name} className={className}></i>;
+        useEffect(() => {
+          window.lucide && window.lucide.createIcons();
+        }, []);
+      return <i data-lucide={name} className={className}></i>;
       }
 
       function NeoBoxxLogo({ className = "" }) {
         return (
           <div className={"flex items-center gap-3 " + className}>
             <div className="h-10 w-10 rounded-xl bg-purple-700 flex items-center justify-center shadow">
-              <Icon name="cube" className="w-6 h-6 text-white"/>
+              <Icon name="cube" className="w-6 h-6 text-white" />
             </div>
             <div className="leading-tight">
-              <span className="text-2xl font-extrabold tracking-tight text-purple-700">Neo</span>
-              <span className="text-2xl font-extrabold tracking-tight text-neutral-900">Boxx</span>
-              <div className="text-xs text-neutral-700">Sua casa modular onde você quiser</div>
+              <span className="text-2xl font-extrabold tracking-tight text-purple-700">
+                Neo
+              </span>
+              <span className="text-2xl font-extrabold tracking-tight text-neutral-900">
+                Boxx
+              </span>
+              <div className="text-xs text-neutral-700">
+                Sua casa modular onde você quiser
+              </div>
             </div>
           </div>
         );
       }
 
       const features = [
-        { icon: "zap", title: "Entrega rápida", desc: "Obra limpa e montagem em dias, não em meses." },
-        { icon: "wrench", title: "Customizável", desc: "Layout, acabamentos e upgrades sob medida." },
-        { icon: "leaf", title: "Eficiente", desc: "Isolamento térmico/acústico e menor desperdício." },
-        { icon: "shield", title: "Alto padrão", desc: "Estrutura robusta e qualidade de alto nível." },
+        {
+          icon: "zap",
+          title: "Entrega rápida",
+          desc: "Obra limpa e montagem em dias, não em meses.",
+        },
+        {
+          icon: "wrench",
+          title: "Customizável",
+          desc: "Layout, acabamentos e upgrades sob medida.",
+        },
+        {
+          icon: "leaf",
+          title: "Eficiente",
+          desc: "Isolamento térmico/acústico e menor desperdício.",
+        },
+        {
+          icon: "shield",
+          title: "Alto padrão",
+          desc: "Estrutura robusta e qualidade de alto nível.",
+        },
       ];
 
       const models = [
-        { size: "18 m²", priceFrom: "R$ 1.500–3.500/m²", bullets: ["Studio inteligente", "Banheiro completo 220 V", "Pronto para climatização"] },
-        { size: "21 m²", priceFrom: "R$ 1.500–3.500/m²", bullets: ["Espaço ampliado", "Acabamentos premium", "Opção de deck externo"] },
+        {
+          size: "18 m²",
+          priceFrom: "R$ 1.500–3.500/m²",
+          bullets: [
+            "Studio inteligente",
+            "Banheiro completo 220 V",
+            "Pronto para climatização",
+          ],
+        },
+        {
+          size: "21 m²",
+          priceFrom: "R$ 1.500–3.500/m²",
+          bullets: [
+            "Espaço ampliado",
+            "Acabamentos premium",
+            "Opção de deck externo",
+          ],
+        },
       ];
 
-      function App(){
+      // >>> IMAGENS DO CARROSSEL DO HERO <<<
+      // Coloque esses arquivos na pasta /assets
+      const heroImages = [
+        "/assets/foto1.png",
+        "/assets/foto2.png",
+        "/assets/foto3.png",
+        "/assets/foto4.png",
+        "/assets/foto5.png",
+      ];
+
+      function ImageCarousel() {
+        const [current, setCurrent] = useState(0);
+
+        useEffect(() => {
+          if (heroImages.length === 0) return;
+          const id = setInterval(() => {
+            setCurrent((prev) => (prev + 1) % heroImages.length);
+          }, 2000); // troca a cada 2 segundos
+          return () => clearInterval(id);
+        }, []);
+
+        if (!heroImages.length) {
+          return (
+            <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-purple-50 to-orange-50 flex items-center justify-center">
+              <Icon name="cube" className="h-28 w-28 text-purple-700" />
+            </div>
+          );
+        }
+
+        return (
+          <div className="w-full">
+            <div className="aspect-[4/3] overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-100 flex items-center justify-center">
+              <img
+                src={heroImages[current]}
+                alt={`NeoBoxx módulo ${current + 1}`}
+                className="h-full w-full object-cover"
+              />
+            </div>
+
+            {/* Pontinhos do carrossel */}
+            <div className="mt-3 flex justify-center gap-2">
+              {heroImages.map((_, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={() => setCurrent(index)}
+                  className={
+                    "h-2.5 w-2.5 rounded-full transition-all " +
+                    (index === current
+                      ? "bg-purple-700 w-5"
+                      : "bg-neutral-300 hover:bg-neutral-400")
+                  }
+                  aria-label={`Ver imagem ${index + 1}`}
+                ></button>
+              ))}
+            </div>
+          </div>
+        );
+      }
+
+      function App() {
         const [email, setEmail] = useState("");
-        const wa = "https://wa.me/5547997687822?text=Ol%C3%A1%20NeoBoxx!%20Quero%20um%20or%C3%A7amento.";
+        const wa =
+          "https://wa.me/5547997687822?text=Ol%C3%A1%20NeoBoxx!%20Quero%20um%20or%C3%A7amento.";
 
         return (
           <div className="min-h-screen">
@@ -70,13 +182,27 @@
               <div className="mx-auto max-w-7xl px-4 md:px-8 py-3 flex items-center justify-between">
                 <NeoBoxxLogo />
                 <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-                  <a href="#modelos" className="hover:text-purple-700">Modelos</a>
-                  <a href="#vantagens" className="hover:text-purple-700">Vantagens</a>
-                  <a href="#especificacoes" className="hover:text-purple-700">Especificações</a>
-                  <a href="#faq" className="hover:text-purple-700">FAQ</a>
+                  <a href="#modelos" className="hover:text-purple-700">
+                    Modelos
+                  </a>
+                  <a href="#vantagens" className="hover:text-purple-700">
+                    Vantagens
+                  </a>
+                  <a href="#especificacoes" className="hover:text-purple-700">
+                    Especificações
+                  </a>
+                  <a href="#faq" className="hover:text-purple-700">
+                    FAQ
+                  </a>
                 </nav>
-                <a href={wa} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl bg-purple-700 text-white px-4 py-2 shadow hover:shadow-md transition">
-                  <Icon name="message-circle" className="h-4 w-4" /> Fale no WhatsApp
+                <a
+                  href={wa}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-2xl bg-purple-700 text-white px-4 py-2 shadow hover:shadow-md transition"
+                >
+                  <Icon name="message-circle" className="h-4 w-4" /> Fale no
+                  WhatsApp
                 </a>
               </div>
             </header>
@@ -92,23 +218,36 @@
                       Casa modular de alto padrão, rápida e sob medida
                     </h1>
                     <p className="mt-4 text-lg text-white/90 max-w-xl">
-                      Soluções NeoBoxx para moradia, investimento e locação. Layouts de 18 e 21 m², upgrades premium e montagem expressa.
+                      Soluções NeoBoxx para moradia, investimento e locação.
+                      Layouts de 18 e 21 m², upgrades premium e montagem
+                      expressa.
                     </p>
                     <div className="mt-6 flex flex-wrap gap-3">
-                      <a href={wa} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl bg-white text-neutral-900 px-5 py-3 font-semibold shadow hover:shadow-md">
-                        <Icon name="phone" className="h-4 w-4" /> Solicitar orçamento
+                      <a
+                        href={wa}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 rounded-2xl bg-white text-neutral-900 px-5 py-3 font-semibold shadow hover:shadow-md"
+                      >
+                        <Icon name="phone" className="h-4 w-4" /> Solicitar
+                        orçamento
                       </a>
-                      <a href="#modelos" className="inline-flex items-center gap-2 rounded-2xl bg-neutral-900/90 text-white px-5 py-3 font-semibold hover:bg-neutral-900">
-                        <Icon name="arrow-right" className="h-4 w-4" /> Ver modelos
+                      <a
+                        href="#modelos"
+                        className="inline-flex items-center gap-2 rounded-2xl bg-neutral-900/90 text-white px-5 py-3 font-semibold hover:bg-neutral-900"
+                      >
+                        <Icon name="arrow-right" className="h-4 w-4" /> Ver
+                        modelos
                       </a>
                     </div>
                   </div>
+
+                  {/* CARD DO HERO COM CARROSSEL */}
                   <div className="bg-white rounded-3xl p-6 shadow-xl border border-neutral-200">
-                    <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-purple-50 to-orange-50 flex items-center justify-center">
-                      <Icon name="cube" className="h-28 w-28 text-purple-700" />
-                    </div>
+                    <ImageCarousel />
                     <div className="mt-4 text-sm text-neutral-600">
-                      * Substitua por fotos/renderizações do seu produto.
+                      * Imagens ilustrativas de módulos NeoBoxx. Consulte nosso
+                      time para layouts personalizados.
                     </div>
                   </div>
                 </div>
@@ -116,14 +255,28 @@
             </section>
 
             {/* Vantagens */}
-            <section id="vantagens" className="mx-auto max-w-7xl px-4 md:px-8 py-16">
-              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">Por que escolher a NeoBoxx?</h2>
-              <p className="mt-3 text-neutral-600 max-w-2xl">Industrialização, qualidade e estética contemporânea — com custo competitivo e prazos previsíveis.</p>
+            <section
+              id="vantagens"
+              className="mx-auto max-w-7xl px-4 md:px-8 py-16"
+            >
+              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
+                Por que escolher a NeoBoxx?
+              </h2>
+              <p className="mt-3 text-neutral-600 max-w-2xl">
+                Industrialização, qualidade e estética contemporânea — com custo
+                competitivo e prazos previsíveis.
+              </p>
               <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {features.map((f, i) => (
-                  <div key={i} className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm hover:shadow-md">
+                  <div
+                    key={i}
+                    className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm hover:shadow-md"
+                  >
                     <div className="h-10 w-10 rounded-2xl bg-purple-100 flex items-center justify-center">
-                      <Icon name={f.icon} className="h-6 w-6 text-purple-700" />
+                      <Icon
+                        name={f.icon}
+                        className="h-6 w-6 text-purple-700"
+                      />
                     </div>
                     <h3 className="mt-4 font-bold text-lg">{f.title}</h3>
                     <p className="mt-1 text-sm text-neutral-600">{f.desc}</p>
@@ -133,27 +286,55 @@
             </section>
 
             {/* Modelos */}
-            <section id="modelos" className="bg-white border-y border-neutral-200">
+            <section
+              id="modelos"
+              className="bg-white border-y border-neutral-200"
+            >
               <div className="mx-auto max-w-7xl px-4 md:px-8 py-16">
-                <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">Modelos e preços</h2>
-                <p className="mt-3 text-neutral-600 max-w-2xl">Valores indicativos por m². Consulte para orçamento detalhado, transporte e fundações.</p>
+                <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
+                  Modelos e preços
+                </h2>
+                <p className="mt-3 text-neutral-600 max-w-2xl">
+                  Valores indicativos por m². Consulte para orçamento
+                  detalhado, transporte e fundações.
+                </p>
                 <div className="mt-10 grid md:grid-cols-2 gap-6">
                   {models.map((m, i) => (
-                    <div key={i} className="rounded-3xl border border-neutral-200 bg-neutral-50 p-6 shadow-sm">
+                    <div
+                      key={i}
+                      className="rounded-3xl border border-neutral-200 bg-neutral-50 p-6 shadow-sm"
+                    >
                       <div className="flex items-center justify-between">
                         <div className="text-2xl font-extrabold">{m.size}</div>
-                        <div className="text-sm text-neutral-600">a partir de</div>
+                        <div className="text-sm text-neutral-600">
+                          a partir de
+                        </div>
                       </div>
-                      <div className="mt-1 text-xl font-bold text-purple-700">{m.priceFrom}</div>
+                      <div className="mt-1 text-xl font-bold text-purple-700">
+                        {m.priceFrom}
+                      </div>
                       <ul className="mt-4 space-y-2">
                         {m.bullets.map((b, j) => (
-                          <li key={j} className="flex items-start gap-2 text-sm">
-                            <Icon name="check" className="h-5 w-5 text-purple-700 shrink-0" /> {b}
+                          <li
+                            key={j}
+                            className="flex items-start gap-2 text-sm"
+                          >
+                            <Icon
+                              name="check"
+                              className="h-5 w-5 text-purple-700 shrink-0"
+                            />{" "}
+                            {b}
                           </li>
                         ))}
                       </ul>
-                      <a href={wa} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-purple-700 text-white px-4 py-2 font-semibold shadow hover:shadow-md">
-                        Pedir proposta <Icon name="arrow-right" className="h-4 w-4" />
+                      <a
+                        href={wa}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-purple-700 text-white px-4 py-2 font-semibold shadow hover:shadow-md"
+                      >
+                        Pedir proposta{" "}
+                        <Icon name="arrow-right" className="h-4 w-4" />
                       </a>
                     </div>
                   ))}
@@ -162,20 +343,40 @@
             </section>
 
             {/* Especificações */}
-            <section id="especificacoes" className="mx-auto max-w-7xl px-4 md:px-8 py-16">
-              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">Especificações técnicas</h2>
+            <section
+              id="especificacoes"
+              className="mx-auto max-w-7xl px-4 md:px-8 py-16"
+            >
+              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
+                Especificações técnicas
+              </h2>
               <div className="mt-6 grid lg:grid-cols-3 gap-6">
                 <div className="rounded-3xl border border-neutral-200 bg-white p-6">
-                  <h3 className="font-bold text-lg flex items-center gap-2"><Icon name="home" className="h-5 w-5"/> Estrutura</h3>
-                  <p className="mt-2 text-sm text-neutral-600">Módulo metálico com fechamentos termoacústicos, esquadrias de alumínio, cobertura com manta térmica.</p>
+                  <h3 className="font-bold text-lg flex items-center gap-2">
+                    <Icon name="home" className="h-5 w-5" /> Estrutura
+                  </h3>
+                  <p className="mt-2 text-sm text-neutral-600">
+                    Módulo metálico com fechamentos termoacústicos, esquadrias
+                    de alumínio, cobertura com manta térmica.
+                  </p>
                 </div>
                 <div className="rounded-3xl border border-neutral-200 bg-white p-6">
-                  <h3 className="font-bold text-lg flex items-center gap-2"><Icon name="wrench" className="h-5 w-5"/> Instalações</h3>
-                  <p className="mt-2 text-sm text-neutral-600">Padrão 220 V (Celesc), quadro de disjuntores setorizado, hidráulica PPR/PEX, pontos conforme ABNT.</p>
+                  <h3 className="font-bold text-lg flex items-center gap-2">
+                    <Icon name="wrench" className="h-5 w-5" /> Instalações
+                  </h3>
+                  <p className="mt-2 text-sm text-neutral-600">
+                    Padrão 220 V (Celesc), quadro de disjuntores setorizado,
+                    hidráulica PPR/PEX, pontos conforme ABNT.
+                  </p>
                 </div>
                 <div className="rounded-3xl border border-neutral-200 bg-white p-6">
-                  <h3 className="font-bold text-lg flex items-center gap-2"><Icon name="shield" className="h-5 w-5"/> Garantia</h3>
-                  <p className="mt-2 text-sm text-neutral-600">Garantia formal de fábrica, manual de uso/manutenção e assistência técnica programada.</p>
+                  <h3 className="font-bold text-lg flex items-center gap-2">
+                    <Icon name="shield" className="h-5 w-5" /> Garantia
+                  </h3>
+                  <p className="mt-2 text-sm text-neutral-600">
+                    Garantia formal de fábrica, manual de uso/manutenção e
+                    assistência técnica programada.
+                  </p>
                 </div>
               </div>
             </section>
@@ -183,35 +384,73 @@
             {/* Lead capture */}
             <section className="bg-gradient-to-br from-orange-500 to-orange-600">
               <div className="mx-auto max-w-7xl px-4 md:px-8 py-14 text-white">
-                <h3 className="text-2xl md:text-3xl font-extrabold">Receba o catálogo e proposta personalizada</h3>
-                <p className="mt-2 text-white/90 max-w-2xl">Envie seu e‑mail e nosso time comercial retorna com opções e prazos.</p>
-                <form onSubmit={(e)=>{e.preventDefault(); alert("Obrigado! Em um site real, este formulário enviaria os dados para o seu e-mail/CRM.");}} className="mt-6 flex flex-col sm:flex-row gap-3 max-w-xl">
-                  <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" required placeholder="seu@email.com"
-                         className="flex-1 rounded-2xl px-4 py-3 text-neutral-900 placeholder-neutral-500 outline-none" />
-                  <button className="rounded-2xl bg-neutral-900 px-5 py-3 font-semibold text-white hover:bg-neutral-800">Enviar</button>
+                <h3 className="text-2xl md:text-3xl font-extrabold">
+                  Receba o catálogo e proposta personalizada
+                </h3>
+                <p className="mt-2 text-white/90 max-w-2xl">
+                  Envie seu e-mail e nosso time comercial retorna com opções e
+                  prazos.
+                </p>
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    alert(
+                      "Obrigado! Em um site real, este formulário enviaria os dados para o seu e-mail/CRM."
+                    );
+                  }}
+                  className="mt-6 flex flex-col sm:flex-row gap-3 max-w-xl"
+                >
+                  <input
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    type="email"
+                    required
+                    placeholder="seu@email.com"
+                    className="flex-1 rounded-2xl px-4 py-3 text-neutral-900 placeholder-neutral-500 outline-none"
+                  />
+                  <button className="rounded-2xl bg-neutral-900 px-5 py-3 font-semibold text-white hover:bg-neutral-800">
+                    Enviar
+                  </button>
                 </form>
               </div>
             </section>
 
             {/* FAQ */}
-            <section id="faq" className="mx-auto max-w-7xl px-4 md:px-8 py-16">
-              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">Perguntas frequentes</h2>
+            <section
+              id="faq"
+              className="mx-auto max-w-7xl px-4 md:px-8 py-16"
+            >
+              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
+                Perguntas frequentes
+              </h2>
               <div className="mt-8 grid md:grid-cols-2 gap-6">
                 <div className="rounded-3xl border border-neutral-200 bg-white p-6">
                   <h4 className="font-bold">Quanto tempo leva para entregar?</h4>
-                  <p className="mt-2 text-sm text-neutral-600">Projeto e produção variam conforme o acabamento. A montagem no local ocorre em poucos dias.</p>
+                  <p className="mt-2 text-sm text-neutral-600">
+                    Projeto e produção variam conforme o acabamento. A montagem
+                    no local ocorre em poucos dias.
+                  </p>
                 </div>
                 <div className="rounded-3xl border border-neutral-200 bg-white p-6">
                   <h4 className="font-bold">Posso financiar?</h4>
-                  <p className="mt-2 text-sm text-neutral-600">Sim, oferecemos opções de financiamento e locação para investidores. Fale com o comercial.</p>
+                  <p className="mt-2 text-sm text-neutral-600">
+                    Sim, oferecemos opções de financiamento e locação para
+                    investidores. Fale com o comercial.
+                  </p>
                 </div>
                 <div className="rounded-3xl border border-neutral-200 bg-white p-6">
                   <h4 className="font-bold">Precisa de fundação?</h4>
-                  <p className="mt-2 text-sm text-neutral-600">Usamos soluções de fundação compatíveis com o solo local (sapatas/estacas). Avaliamos no orçamento.</p>
+                  <p className="mt-2 text-sm text-neutral-600">
+                    Usamos soluções de fundação compatíveis com o solo local
+                    (sapatas/estacas). Avaliamos no orçamento.
+                  </p>
                 </div>
                 <div className="rounded-3xl border border-neutral-200 bg-white p-6">
                   <h4 className="font-bold">É possível mudar de lugar?</h4>
-                  <p className="mt-2 text-sm text-neutral-600">Sim. Os módulos são dimensionados para transporte e reinstalação, com verificação técnica.</p>
+                  <p className="mt-2 text-sm text-neutral-600">
+                    Sim. Os módulos são dimensionados para transporte e
+                    reinstalação, com verificação técnica.
+                  </p>
                 </div>
               </div>
             </section>
@@ -221,27 +460,52 @@
               <div className="mx-auto max-w-7xl px-4 md:px-8 py-10 grid md:grid-cols-3 gap-8">
                 <div>
                   <NeoBoxxLogo />
-                  <p className="mt-3 text-sm text-neutral-400">São Francisco do Sul • SC • Brasil</p>
+                  <p className="mt-3 text-sm text-neutral-400">
+                    São Francisco do Sul • SC • Brasil
+                  </p>
                   <div className="mt-4 flex items-center gap-3 text-sm">
-                    <a href={wa} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl bg-purple-700 text-white px-3 py-1.5">
-                      <Icon name="phone" className="h-4 w-4"/> WhatsApp
+                    <a
+                      href={wa}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 rounded-2xl bg-purple-700 text-white px-3 py-1.5"
+                    >
+                      <Icon name="phone" className="h-4 w-4" /> WhatsApp
                     </a>
-                    <a href="mailto:luizhenriquecorreapalma@gmail.com" className="inline-flex items-center gap-2 rounded-2xl bg-neutral-800 px-3 py-1.5">
-                      <Icon name="mail" className="h-4 w-4"/> E‑mail
+                    <a
+                      href="mailto:luizhenriquecorreapalma@gmail.com"
+                      className="inline-flex items-center gap-2 rounded-2xl bg-neutral-800 px-3 py-1.5"
+                    >
+                      <Icon name="mail" className="h-4 w-4" /> E-mail
                     </a>
                   </div>
                 </div>
                 <div>
                   <h5 className="font-semibold mb-3">Links</h5>
                   <ul className="space-y-2 text-sm text-neutral-300">
-                    <li><a href="#modelos" className="hover:text-white">Modelos</a></li>
-                    <li><a href="#especificacoes" className="hover:text-white">Especificações</a></li>
-                    <li><a href="#faq" className="hover:text-white">FAQ</a></li>
+                    <li>
+                      <a href="#modelos" className="hover:text-white">
+                        Modelos
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#especificacoes" className="hover:text-white">
+                        Especificações
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#faq" className="hover:text-white">
+                        FAQ
+                      </a>
+                    </li>
                   </ul>
                 </div>
                 <div>
                   <h5 className="font-semibold mb-3">Legal</h5>
-                  <p className="text-sm text-neutral-400">© {new Date().getFullYear()} NeoBoxx. Todos os direitos reservados.</p>
+                  <p className="text-sm text-neutral-400">
+                    © {new Date().getFullYear()} NeoBoxx. Todos os direitos
+                    reservados.
+                  </p>
                 </div>
               </div>
             </footer>
@@ -249,8 +513,8 @@
         );
       }
 
-      const root = ReactDOM.createRoot(document.getElementById('root'));
-      root.render(<App/>);
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
     </script>
   </body>
 </html>
