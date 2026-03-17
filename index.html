@@ -25,7 +25,6 @@
     <!-- Lucide icons via CDN -->
     <script src="https://unpkg.com/lucide@0.454.0/dist/umd/lucide.js"></script>
     <style>
-      /* Smooth scroll & font */
       html {
         scroll-behavior: smooth;
       }
@@ -38,11 +37,10 @@
       const { useState, useEffect } = React;
 
       function Icon({ name, className }) {
-        // Simple Lucide icon wrapper
         useEffect(() => {
           window.lucide && window.lucide.createIcons();
         }, []);
-      return <i data-lucide={name} className={className}></i>;
+        return <i data-lucide={name} className={className}></i>;
       }
 
       function NeoBoxxLogo({ className = "" }) {
@@ -110,8 +108,6 @@
         },
       ];
 
-      // >>> IMAGENS DO CARROSSEL DO HERO <<<
-      // Coloque esses arquivos na pasta /assets
       const heroImages = [
         "/assets/foto1.png",
         "/assets/foto2.png",
@@ -127,7 +123,7 @@
           if (heroImages.length === 0) return;
           const id = setInterval(() => {
             setCurrent((prev) => (prev + 1) % heroImages.length);
-          }, 2000); // troca a cada 2 segundos
+          }, 2000);
           return () => clearInterval(id);
         }, []);
 
@@ -149,7 +145,6 @@
               />
             </div>
 
-            {/* Pontinhos do carrossel */}
             <div className="mt-3 flex justify-center gap-2">
               {heroImages.map((_, index) => (
                 <button
@@ -173,11 +168,10 @@
       function App() {
         const [email, setEmail] = useState("");
         const wa =
-          "https://wa.me/5547997687822?text=Ol%C3%A1%20NeoBoxx!%20Quero%20um%20or%C3%A7amento.";
+          "https://wa.me/5547999038724?text=Ol%C3%A1%20NeoBoxx!%20Tenho%20interesse%20em:%0A1.%20Or%C3%A7amento%0A2.%20Cat%C3%A1logo%0A3.%20Financiamento%0A4.%20Prazo%20de%20entrega";
 
         return (
           <div className="min-h-screen">
-            {/* Header */}
             <header className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-neutral-200">
               <div className="mx-auto max-w-7xl px-4 md:px-8 py-3 flex items-center justify-between">
                 <NeoBoxxLogo />
@@ -201,13 +195,11 @@
                   rel="noreferrer"
                   className="inline-flex items-center gap-2 rounded-2xl bg-purple-700 text-white px-4 py-2 shadow hover:shadow-md transition"
                 >
-                  <Icon name="message-circle" className="h-4 w-4" /> Fale no
-                  WhatsApp
+                  <Icon name="message-circle" className="h-4 w-4" /> Atendimento via WhatsApp
                 </a>
               </div>
             </header>
 
-            {/* Hero */}
             <section className="relative overflow-hidden">
               <div className="absolute inset-0 bg-orange-500/90" />
               <div className="relative mx-auto max-w-7xl px-4 md:px-8 py-16 md:py-24">
@@ -242,7 +234,6 @@
                     </div>
                   </div>
 
-                  {/* CARD DO HERO COM CARROSSEL */}
                   <div className="bg-white rounded-3xl p-6 shadow-xl border border-neutral-200">
                     <ImageCarousel />
                     <div className="mt-4 text-sm text-neutral-600">
@@ -254,7 +245,6 @@
               </div>
             </section>
 
-            {/* Vantagens */}
             <section
               id="vantagens"
               className="mx-auto max-w-7xl px-4 md:px-8 py-16"
@@ -285,7 +275,6 @@
               </div>
             </section>
 
-            {/* Modelos */}
             <section
               id="modelos"
               className="bg-white border-y border-neutral-200"
@@ -342,7 +331,6 @@
               </div>
             </section>
 
-            {/* Especificações */}
             <section
               id="especificacoes"
               className="mx-auto max-w-7xl px-4 md:px-8 py-16"
@@ -381,7 +369,6 @@
               </div>
             </section>
 
-            {/* Lead capture */}
             <section className="bg-gradient-to-br from-orange-500 to-orange-600">
               <div className="mx-auto max-w-7xl px-4 md:px-8 py-14 text-white">
                 <h3 className="text-2xl md:text-3xl font-extrabold">
@@ -415,7 +402,6 @@
               </div>
             </section>
 
-            {/* FAQ */}
             <section
               id="faq"
               className="mx-auto max-w-7xl px-4 md:px-8 py-16"
@@ -455,7 +441,6 @@
               </div>
             </section>
 
-            {/* Footer */}
             <footer className="bg-neutral-950 text-neutral-100">
               <div className="mx-auto max-w-7xl px-4 md:px-8 py-10 grid md:grid-cols-3 gap-8">
                 <div>
